@@ -2,7 +2,9 @@ import { Star, Calendar, Shield } from 'lucide-react';
 import { Review } from '@/types/reviews';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface ReviewCardProps {
   review: Review;
@@ -11,6 +13,21 @@ interface ReviewCardProps {
 const ReviewCard = ({ review }: ReviewCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [profile, setProfile] = useState<{ username: string; avatar_url: string | null } | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const { data } = await supabase
+        .from('profiles')
+        .select('username, avatar_url')
+        .eq('id', review.user_id)
+        .single();
+      
+      if (data) setProfile(data);
+    };
+    
+    fetchProfile();
+  }, [review.user_id]);
 
   const renderStars = (rating: number) => (
     <div className="flex items-center gap-1">
@@ -45,15 +62,14 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
       <div className="flex items-start justify-between">
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-              <span className="text-sm font-semibold text-primary">
-                {review.user_id.substring(0, 2).toUpperCase()}
-              </span>
-            </div>
+            <Avatar className="h-10 w-10">
+              <AvatarImage src={profile?.avatar_url || undefined} alt={profile?.username} />
+              <AvatarFallback>{profile?.username?.[0]?.toUpperCase() || 'U'}</AvatarFallback>
+            </Avatar>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-medium text-foreground">
-                  {review.is_verified_purchase ? 'Verified Buyer' : 'Customer'}
+                  {profile?.username || 'Loading...'}
                 </span>
                 {review.is_verified_purchase && (
                   <Badge variant="secondary" className="text-xs">
