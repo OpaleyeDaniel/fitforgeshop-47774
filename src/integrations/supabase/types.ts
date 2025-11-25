@@ -14,13 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      reviews: {
+        Row: {
+          created_at: string
+          id: string
+          is_verified_purchase: boolean
+          photos: string[] | null
+          product_id: string
+          rating: number
+          review_text: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_verified_purchase?: boolean
+          photos?: string[] | null
+          product_id: string
+          rating: number
+          review_text: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_verified_purchase?: boolean
+          photos?: string[] | null
+          product_id?: string
+          rating?: number
+          review_text?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      public_reviews: {
+        Row: {
+          created_at: string | null
+          id: string | null
+          is_verified_purchase: boolean | null
+          photos: string[] | null
+          product_id: string | null
+          rating: number | null
+          review_text: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string | null
+          is_verified_purchase?: boolean | null
+          photos?: string[] | null
+          product_id?: string | null
+          rating?: number | null
+          review_text?: string | null
+          user_id?: never
+        }
+        Update: {
+          created_at?: string | null
+          id?: string | null
+          is_verified_purchase?: boolean | null
+          photos?: string[] | null
+          product_id?: string | null
+          rating?: number | null
+          review_text?: string | null
+          user_id?: never
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      calculate_product_rating_stats: {
+        Args: { p_product_id: string }
+        Returns: {
+          average_rating: number
+          review_count: number
+        }[]
+      }
+      get_rating_distribution: {
+        Args: { p_product_id: string }
+        Returns: {
+          count: number
+          rating: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
