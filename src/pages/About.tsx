@@ -9,8 +9,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { 
-  Data, 
-  Leaf, 
   Users, 
   Trophy, 
   Target, 
@@ -36,7 +34,7 @@ const About = () => {
       description: "This isn't just a simple algorithm. You need a machine learning model trained on a massive dataset of"
     },
     {
-      icon: Data,
+      icon: Users,
       title: "Product Data",
       description: "Original MSRP, brand, category, and model."
     },
