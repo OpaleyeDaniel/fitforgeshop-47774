@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, ShoppingBag, Heart, ChevronDown, User, LogOut } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag, Heart, ChevronDown, User, LogOut, Coins } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useKarma } from '@/contexts/KarmaContext';
 import MegaMenu from './MegaMenu';
 import SearchOverlay from './SearchOverlay';
 import WishlistDrawer from './WishlistDrawer';
+import KarmaModeToggle from './KarmaModeToggle';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -25,6 +27,7 @@ const Navigation = () => {
   const { state } = useCart();
   const { state: wishlistState } = useWishlist();
   const { user, profile, signOut } = useAuth();
+  const { wallet } = useKarma();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -34,6 +37,9 @@ const Navigation = () => {
   const navLinks = [{
     name: 'New Arrivals',
     href: '/new-arrivals'
+  }, {
+    name: 'Karma Market',
+    href: '/karma-market'
   }, {
     name: 'Women',
     href: '/women',
@@ -68,7 +74,7 @@ const Navigation = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <h1 className="text-2xl font-black tracking-tight">
-                FIT<span className="text-sky-500">FORGE</span>
+                <span className="text-primary">KARMA</span>
               </h1>
             </Link>
 
@@ -100,6 +106,9 @@ const Navigation = () => {
 
             {/* Actions */}
             <div className="flex items-center space-x-4">
+              <div className="hidden lg:block">
+                <KarmaModeToggle />
+              </div>
               <button className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-200" onClick={() => setIsSearchOpen(true)}>
                 <Search size={20} />
               </button>
@@ -145,6 +154,12 @@ const Navigation = () => {
                       <User className="mr-2 h-4 w-4" />
                       My Account
                     </DropdownMenuItem>
+                    {wallet && (
+                      <DropdownMenuItem>
+                        <Coins className="mr-2 h-4 w-4 text-primary" />
+                        <span className="font-semibold">{wallet.balance} Karma</span>
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem onClick={handleSignOut}>
                       <LogOut className="mr-2 h-4 w-4" />
                       Sign Out

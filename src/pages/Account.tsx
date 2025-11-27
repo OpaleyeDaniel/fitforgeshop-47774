@@ -4,11 +4,13 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import KarmaWallet from "@/components/KarmaWallet";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Upload } from 'lucide-react';
 
 const Account = () => {
@@ -64,13 +66,20 @@ const Account = () => {
         <div className="container mx-auto px-4 pt-24 pb-8">
           <h1 className="text-4xl font-bold text-foreground mb-8">My Account</h1>
           
-          <div className="grid gap-6 max-w-2xl">
-            <Card>
-              <CardHeader>
-                <CardTitle>Profile Information</CardTitle>
-                <CardDescription>Manage your profile details</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
+          <Tabs defaultValue="profile" className="max-w-4xl">
+            <TabsList>
+              <TabsTrigger value="profile">Profile</TabsTrigger>
+              <TabsTrigger value="karma">Karma Wallet</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="profile">
+              <div className="grid gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Profile Information</CardTitle>
+                    <CardDescription>Manage your profile details</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
                 <div className="flex items-center gap-6">
                   <Avatar className="h-24 w-24">
                     <AvatarImage src={profile?.avatar_url || undefined} alt={profile?.username} />
@@ -118,9 +127,15 @@ const Account = () => {
                     disabled 
                   />
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="karma">
+              <KarmaWallet />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
       <Footer />

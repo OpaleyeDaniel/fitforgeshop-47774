@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { WishlistProvider } from "@/contexts/WishlistContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { KarmaProvider } from "@/contexts/KarmaContext";
 import ScrollToTop from "@/components/ScrollToTop";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
@@ -32,15 +33,19 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Partnerships from "./pages/Partnerships";
 import NotFound from "./pages/NotFound";
+import KarmaMarket from "./pages/KarmaMarket";
+import ListKarmaItem from "./pages/ListKarmaItem";
+import KarmaItemDetail from "./pages/KarmaItemDetail";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <TooltipProvider>
+      <KarmaProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <TooltipProvider>
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -70,14 +75,18 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/partnerships" element={<Partnerships />} />
+            <Route path="/karma-market" element={<KarmaMarket />} />
+            <Route path="/list-karma-item" element={<ProtectedRoute><ListKarmaItem /></ProtectedRoute>} />
+            <Route path="/karma-item/:id" element={<KarmaItemDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </WishlistProvider>
-  </CartProvider>
-</AuthProvider>
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </WishlistProvider>
+      </CartProvider>
+    </KarmaProvider>
+  </AuthProvider>
 </QueryClientProvider>
 );
 

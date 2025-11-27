@@ -14,6 +14,353 @@ export type Database = {
   }
   public: {
     Tables: {
+      karma_chats: {
+        Row: {
+          buyer_id: string
+          created_at: string
+          id: string
+          item_id: string
+          seller_id: string
+        }
+        Insert: {
+          buyer_id: string
+          created_at?: string
+          id?: string
+          item_id: string
+          seller_id: string
+        }
+        Update: {
+          buyer_id?: string
+          created_at?: string
+          id?: string
+          item_id?: string
+          seller_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_chats_buyer_id_fkey"
+            columns: ["buyer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_chats_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "karma_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_chats_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      karma_escrow: {
+        Row: {
+          amount: number
+          buyer_id: string
+          created_at: string
+          dispute_reason: string | null
+          id: string
+          item_id: string
+          released_at: string | null
+          seller_id: string
+          status: string
+          transaction_id: string
+        }
+        Insert: {
+          amount: number
+          buyer_id: string
+          created_at?: string
+          dispute_reason?: string | null
+          id?: string
+          item_id: string
+          released_at?: string | null
+          seller_id: string
+          status?: string
+          transaction_id: string
+        }
+        Update: {
+          amount?: number
+          buyer_id?: string
+          created_at?: string
+          dispute_reason?: string | null
+          id?: string
+          item_id?: string
+          released_at?: string | null
+          seller_id?: string
+          status?: string
+          transaction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_escrow_buyer_id_fkey"
+            columns: ["buyer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_escrow_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "karma_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_escrow_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_escrow_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "karma_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      karma_items: {
+        Row: {
+          brand: string | null
+          category: string
+          condition: string
+          created_at: string
+          description: string | null
+          id: string
+          images: string[]
+          karma_value: number
+          location: string | null
+          seller_id: string
+          status: string
+          title: string
+          updated_at: string
+          valuation_breakdown: Json | null
+        }
+        Insert: {
+          brand?: string | null
+          category: string
+          condition: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[]
+          karma_value: number
+          location?: string | null
+          seller_id: string
+          status?: string
+          title: string
+          updated_at?: string
+          valuation_breakdown?: Json | null
+        }
+        Update: {
+          brand?: string | null
+          category?: string
+          condition?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[]
+          karma_value?: number
+          location?: string | null
+          seller_id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          valuation_breakdown?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_items_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      karma_messages: {
+        Row: {
+          chat_id: string
+          created_at: string
+          id: string
+          message: string
+          sender_id: string
+        }
+        Insert: {
+          chat_id: string
+          created_at?: string
+          id?: string
+          message: string
+          sender_id: string
+        }
+        Update: {
+          chat_id?: string
+          created_at?: string
+          id?: string
+          message?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_messages_chat_id_fkey"
+            columns: ["chat_id"]
+            isOneToOne: false
+            referencedRelation: "karma_chats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      karma_transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          from_user_id: string | null
+          id: string
+          item_id: string | null
+          status: string
+          to_user_id: string | null
+          transaction_type: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          from_user_id?: string | null
+          id?: string
+          item_id?: string | null
+          status?: string
+          to_user_id?: string | null
+          transaction_type: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          from_user_id?: string | null
+          id?: string
+          item_id?: string | null
+          status?: string
+          to_user_id?: string | null
+          transaction_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_transactions_from_user_id_fkey"
+            columns: ["from_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_transactions_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "karma_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_transactions_to_user_id_fkey"
+            columns: ["to_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      karma_wallets: {
+        Row: {
+          balance: number
+          created_at: string
+          earned_total: number
+          gifted_total: number
+          id: string
+          spent_total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          created_at?: string
+          earned_total?: number
+          gifted_total?: number
+          id?: string
+          spent_total?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          created_at?: string
+          earned_total?: number
+          gifted_total?: number
+          id?: string
+          spent_total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_wallets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      karma_wishlists: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "karma_wishlists_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "karma_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "karma_wishlists_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -76,6 +423,42 @@ export type Database = {
           {
             foreignKeyName: "reviews_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_follows: {
+        Row: {
+          created_at: string
+          follower_id: string
+          following_id: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          follower_id: string
+          following_id: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          follower_id?: string
+          following_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_follows_follower_id_fkey"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_follows_following_id_fkey"
+            columns: ["following_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]

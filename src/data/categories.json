@@ -1,1 +1,137 @@
-[]
+[
+  {
+    "id": "electronics",
+    "name": "Electronics",
+    "slug": "electronics",
+    "description": "Trade your electronics for Karma Points",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 1
+  },
+  {
+    "id": "phones",
+    "name": "Phones & Tablets",
+    "slug": "phones",
+    "description": "Smartphones, tablets, and accessories",
+    "parentCategory": "electronics",
+    "image": "/placeholder.svg",
+    "sortOrder": 2
+  },
+  {
+    "id": "laptops",
+    "name": "Laptops & Computers",
+    "slug": "laptops",
+    "description": "Laptops, desktops, and computer accessories",
+    "parentCategory": "electronics",
+    "image": "/placeholder.svg",
+    "sortOrder": 3
+  },
+  {
+    "id": "audio",
+    "name": "Audio & Headphones",
+    "slug": "audio",
+    "description": "Headphones, speakers, and audio equipment",
+    "parentCategory": "electronics",
+    "image": "/placeholder.svg",
+    "sortOrder": 4
+  },
+  {
+    "id": "fashion",
+    "name": "Fashion & Apparel",
+    "slug": "fashion",
+    "description": "Clothing, shoes, and accessories",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 5
+  },
+  {
+    "id": "shoes",
+    "name": "Shoes",
+    "slug": "shoes",
+    "description": "Sneakers, boots, and all types of footwear",
+    "parentCategory": "fashion",
+    "image": "/placeholder.svg",
+    "sortOrder": 6
+  },
+  {
+    "id": "clothing",
+    "name": "Clothing",
+    "slug": "clothing",
+    "description": "Shirts, pants, dresses, and more",
+    "parentCategory": "fashion",
+    "image": "/placeholder.svg",
+    "sortOrder": 7
+  },
+  {
+    "id": "bags",
+    "name": "Bags & Luggage",
+    "slug": "bags",
+    "description": "Backpacks, handbags, suitcases, and more",
+    "parentCategory": "fashion",
+    "image": "/placeholder.svg",
+    "sortOrder": 8
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories",
+    "slug": "accessories",
+    "description": "Watches, jewelry, sunglasses, and more",
+    "parentCategory": "fashion",
+    "image": "/placeholder.svg",
+    "sortOrder": 9
+  },
+  {
+    "id": "home",
+    "name": "Home & Living",
+    "slug": "home",
+    "description": "Furniture, decor, and home essentials",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 10
+  },
+  {
+    "id": "furniture",
+    "name": "Furniture",
+    "slug": "furniture",
+    "description": "Tables, chairs, sofas, and more",
+    "parentCategory": "home",
+    "image": "/placeholder.svg",
+    "sortOrder": 11
+  },
+  {
+    "id": "books",
+    "name": "Books & Media",
+    "slug": "books",
+    "description": "Books, magazines, and educational materials",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 12
+  },
+  {
+    "id": "sports",
+    "name": "Sports & Fitness",
+    "slug": "sports",
+    "description": "Athletic wear, equipment, and accessories",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 13
+  },
+  {
+    "id": "toys",
+    "name": "Toys & Games",
+    "slug": "toys",
+    "description": "Toys, games, and entertainment",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 14
+  },
+  {
+    "id": "tools",
+    "name": "Tools & DIY",
+    "slug": "tools",
+    "description": "Hand tools, power tools, and equipment",
+    "parentCategory": null,
+    "image": "/placeholder.svg",
+    "sortOrder": 15
+  }
+]
